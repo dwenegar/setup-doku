@@ -1,0 +1,23 @@
+
+name: 'Setup Doku'
+description: 'Set up a specific version of Doku and DocFx, and update the system environment variables.'
+author: 'dwenegar'
+branding:
+  icon: moon
+  color: blue
+inputs:
+  repo-token:
+    description: 'The GITHUB_TOKEN secret'
+    required: false
+  doku-version:
+    description: 'Doku version to use.'
+    required: false
+    default: 'latest'
+  docfx-version:
+    description: 'DocFx version to use.'
+    required: false
+    default: 'latest'
+
+runs:
+  using: 'node12'
+  main: 'dist/index.js'
