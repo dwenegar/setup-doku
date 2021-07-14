@@ -5073,10 +5073,10 @@ exports.getInputs = void 0;
 const core = __importStar(__webpack_require__(470));
 const core_1 = __webpack_require__(470);
 const constants_1 = __webpack_require__(32);
-const VALID_DOKU_VERSIONS = ['0.3.1'];
+const VALID_DOKU_VERSIONS = ['0.3.1', '0.3.2', '0.3.3', '0.3.4'];
 const DOKU_VERSION_ALIASES = {
-    '0.3': '0.3.1',
-    latest: '0.3.1'
+    '0.3': '0.3.4',
+    latest: '0.3.4'
 };
 const VALID_DOCFX_VERSIONS = ['2.57.2'];
 const LUAROCKS_VERSION_ALIASES = {
