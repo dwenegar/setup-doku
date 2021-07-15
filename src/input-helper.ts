@@ -3,11 +3,11 @@ import {getInput} from '@actions/core';
 import {InputNames} from './constants';
 import {Inputs} from './inputs';
 
-const VALID_DOKU_VERSIONS: string[] = ['0.3.1', '0.3.2', '0.3.3', '0.3.4'];
+const VALID_DOKU_VERSIONS: string[] = ['0.3.1', '0.3.2', '0.3.3', '0.3.4', '0.3.5'];
 
 const DOKU_VERSION_ALIASES: {[index: string]: string} = {
-  '0.3': '0.3.4',
-  latest: '0.3.4'
+  '0.3': '0.3.5',
+  latest: '0.3.5'
 };
 
 const VALID_DOCFX_VERSIONS: string[] = ['2.57.2'];
