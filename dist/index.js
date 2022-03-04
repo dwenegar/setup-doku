@@ -5073,15 +5073,13 @@ exports.getInputs = void 0;
 const core = __importStar(__webpack_require__(470));
 const core_1 = __webpack_require__(470);
 const constants_1 = __webpack_require__(32);
-const VALID_DOKU_VERSIONS = ['0.3.1', '0.3.2', '0.3.3', '0.3.4', '0.3.5'];
+const VALID_DOKU_VERSIONS = ['0.3.1', '0.3.2', '0.3.3', '0.3.4', '0.3.5', '0.5.2'];
 const DOKU_VERSION_ALIASES = {
-    '0.3': '0.3.5',
-    latest: '0.3.5'
+    latest: '0.5.2'
 };
-const VALID_DOCFX_VERSIONS = ['2.57.2'];
-const LUAROCKS_VERSION_ALIASES = {
-    '2.57': '2.57.2',
-    latest: '2.57.2'
+const VALID_DOCFX_VERSIONS = ['2.59.0'];
+const DOCFX_VERSION_ALIASES = {
+    latest: '2.59.0'
 };
 function getInputs() {
     const dokuVersion = core_1.getInput(constants_1.InputNames.DokuVersion, { required: true });
@@ -5096,8 +5094,8 @@ function getInputs() {
     }
     let resolvedDocFxVersion = docfxVersion;
     if (docfxVersion) {
-        if (LUAROCKS_VERSION_ALIASES[docfxVersion]) {
-            resolvedDocFxVersion = LUAROCKS_VERSION_ALIASES[docfxVersion];
+        if (DOCFX_VERSION_ALIASES[docfxVersion]) {
+            resolvedDocFxVersion = DOCFX_VERSION_ALIASES[docfxVersion];
         }
         if (!VALID_DOCFX_VERSIONS.includes(resolvedDocFxVersion)) {
             core.setFailed(`Invalid docfx version: ${docfxVersion}`);

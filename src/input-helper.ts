@@ -3,18 +3,16 @@ import {getInput} from '@actions/core';
 import {InputNames} from './constants';
 import {Inputs} from './inputs';
 
-const VALID_DOKU_VERSIONS: string[] = ['0.3.1', '0.3.2', '0.3.3', '0.3.4', '0.3.5'];
+const VALID_DOKU_VERSIONS: string[] = ['0.3.1', '0.3.2', '0.3.3', '0.3.4', '0.3.5', '0.5.2'];
 
 const DOKU_VERSION_ALIASES: {[index: string]: string} = {
-  '0.3': '0.3.5',
-  latest: '0.3.5'
+  latest: '0.5.2'
 };
 
-const VALID_DOCFX_VERSIONS: string[] = ['2.57.2'];
+const VALID_DOCFX_VERSIONS: string[] = ['2.59.0'];
 
-const LUAROCKS_VERSION_ALIASES: {[index: string]: string} = {
-  '2.57': '2.57.2',
-  latest: '2.57.2'
+const DOCFX_VERSION_ALIASES: {[index: string]: string} = {
+  latest: '2.59.0'
 };
 
 export function getInputs(): Inputs {
@@ -33,8 +31,8 @@ export function getInputs(): Inputs {
 
   let resolvedDocFxVersion = docfxVersion;
   if (docfxVersion) {
-    if (LUAROCKS_VERSION_ALIASES[docfxVersion]) {
-      resolvedDocFxVersion = LUAROCKS_VERSION_ALIASES[docfxVersion];
+    if (DOCFX_VERSION_ALIASES[docfxVersion]) {
+      resolvedDocFxVersion = DOCFX_VERSION_ALIASES[docfxVersion];
     }
 
     if (!VALID_DOCFX_VERSIONS.includes(resolvedDocFxVersion)) {
