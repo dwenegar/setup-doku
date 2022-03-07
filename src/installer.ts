@@ -3,7 +3,6 @@ import * as core from '@actions/core';
 import * as path from 'path';
 import * as sys from './system';
 import * as fs from 'fs';
-import {openStdin} from 'node:process';
 
 async function extractArchive(archivePath: string, archiveSuffix: string, destPath: string): Promise<string> {
   if (archiveSuffix === 'zip') {
@@ -39,12 +38,12 @@ export async function installDoku(authToken: string, version: string, installPat
   }
 }
 
-export async function installDocFx(authToken: string, version: string, installPath: string): Promise<string> {
+export async function installDocFx(authToken: string, installPath: string): Promise<string> {
   try {
-    core.info(`Attempting to install DocFx ${version}`);
-    const url: string = `https://github.com/dotnet/docfx/releases/download/v${version}/docfx.zip`;
+    core.info('Attempting to install DocFx');
+    const url: string = `https://github.com/dotnet/docfx/releases/download/v2.59.0/docfx.zip`;
 
-    core.info(`Downloading DocFx ${version} from ${url}`);
+    core.info(`Downloading DocFx from ${url}`);
     const downloadPath: string = await tc.downloadTool(url, undefined, authToken);
     const docFxInstallPath = await extractArchive(downloadPath, 'zip', path.join(installPath, 'docfx'));
     if (sys.getPlatform() != 'win32') {
@@ -53,6 +52,6 @@ export async function installDocFx(authToken: string, version: string, installPa
     }
     return docFxInstallPath;
   } catch (err) {
-    throw new Error(`Failed to install version ${version}: ${err}`);
+    throw new Error(`Failed to install DocFX: ${err}`);
   }
 }

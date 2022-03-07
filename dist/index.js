@@ -2480,13 +2480,17 @@ async function setupDoku() {
         core.info(`Setup Doku version ${dokuVersion}`);
         const dokuPath = await installer_1.installDoku(inputs.repoToken, dokuVersion, installPrefix);
         addPath(dokuPath);
-        const docFxVersion = inputs.docFxVersion;
-        core.info(`Setup DocFx version ${docFxVersion}`);
-        const docFxPath = await installer_1.installDocFx(inputs.repoToken, docFxVersion, installPrefix);
+        core.info(`Setup DocFx`);
+        const docFxPath = await installer_1.installDocFx(inputs.repoToken, installPrefix);
         addPath(docFxPath);
     }
-    catch (error) {
-        core.setFailed(error.message);
+    catch (e) {
+        if (typeof e === 'string') {
+            core.setFailed(e);
+        }
+        else if (e instanceof Error) {
+            core.setFailed(e.message);
+        }
     }
 }
 exports.setupDoku = setupDoku;
@@ -5015,11 +5019,11 @@ async function installDoku(authToken, version, installPath) {
     }
 }
 exports.installDoku = installDoku;
-async function installDocFx(authToken, version, installPath) {
+async function installDocFx(authToken, installPath) {
     try {
-        core.info(`Attempting to install DocFx ${version}`);
-        const url = `https://github.com/dotnet/docfx/releases/download/v${version}/docfx.zip`;
-        core.info(`Downloading DocFx ${version} from ${url}`);
+        core.info('Attempting to install DocFx');
+        const url = `https://github.com/dotnet/docfx/releases/download/v2.59.0/docfx.zip`;
+        core.info(`Downloading DocFx from ${url}`);
         const downloadPath = await tc.downloadTool(url, undefined, authToken);
         const docFxInstallPath = await extractArchive(downloadPath, 'zip', path.join(installPath, 'docfx'));
         if (sys.getPlatform() != 'win32') {
@@ -5029,7 +5033,7 @@ async function installDocFx(authToken, version, installPath) {
         return docFxInstallPath;
     }
     catch (err) {
-        throw new Error(`Failed to install version ${version}: ${err}`);
+        throw new Error(`Failed to install DocFX: ${err}`);
     }
 }
 exports.installDocFx = installDocFx;
@@ -5077,13 +5081,8 @@ const VALID_DOKU_VERSIONS = ['0.3.1', '0.3.2', '0.3.3', '0.3.4', '0.3.5', '0.5.2
 const DOKU_VERSION_ALIASES = {
     latest: '0.5.2'
 };
-const VALID_DOCFX_VERSIONS = ['2.59.0'];
-const DOCFX_VERSION_ALIASES = {
-    latest: '2.59.0'
-};
 function getInputs() {
     const dokuVersion = core_1.getInput(constants_1.InputNames.DokuVersion, { required: true });
-    const docfxVersion = core_1.getInput(constants_1.InputNames.DocFxVersion, { required: true });
     const repoToken = core_1.getInput(constants_1.InputNames.RepoToken, { required: false });
     let resolvedDokuVersion = dokuVersion;
     if (DOKU_VERSION_ALIASES[dokuVersion]) {
@@ -5092,18 +5091,8 @@ function getInputs() {
     if (!VALID_DOKU_VERSIONS.includes(resolvedDokuVersion)) {
         core.setFailed(`Invalid doku version: ${dokuVersion}`);
     }
-    let resolvedDocFxVersion = docfxVersion;
-    if (docfxVersion) {
-        if (DOCFX_VERSION_ALIASES[docfxVersion]) {
-            resolvedDocFxVersion = DOCFX_VERSION_ALIASES[docfxVersion];
-        }
-        if (!VALID_DOCFX_VERSIONS.includes(resolvedDocFxVersion)) {
-            core.setFailed(`Invalid docfx version: ${docfxVersion}`);
-        }
-    }
     return {
         dokuVersion: resolvedDokuVersion,
-        docFxVersion: resolvedDocFxVersion,
         repoToken: repoToken
     };
 }

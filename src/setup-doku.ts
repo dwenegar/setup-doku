@@ -20,11 +20,14 @@ export async function setupDoku() {
     const dokuPath = await installDoku(inputs.repoToken, dokuVersion, installPrefix);
     addPath(dokuPath);
 
-    const docFxVersion = inputs.docFxVersion;
-    core.info(`Setup DocFx version ${docFxVersion}`);
-    const docFxPath = await installDocFx(inputs.repoToken, docFxVersion, installPrefix);
+    core.info(`Setup DocFx`);
+    const docFxPath = await installDocFx(inputs.repoToken, installPrefix);
     addPath(docFxPath);
-  } catch (error) {
-    core.setFailed(error.message);
+  } catch (e) {
+    if (typeof e === 'string') {
+      core.setFailed(e);
+    } else if (e instanceof Error) {
+      core.setFailed(e.message);
+    }
   }
 }
