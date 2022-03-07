@@ -3,10 +3,10 @@ import {getInput} from '@actions/core';
 import {InputNames} from './constants';
 import {Inputs} from './inputs';
 
-const VALID_DOKU_VERSIONS: string[] = ['0.3.1', '0.3.2', '0.3.3', '0.3.4', '0.3.5', '0.5.2'];
+const VALID_DOKU_VERSIONS: string[] = ['0.6.0'];
 
 const DOKU_VERSION_ALIASES: {[index: string]: string} = {
-  latest: '0.5.2'
+  latest: '0.6.0'
 };
 
 export function getInputs(): Inputs {

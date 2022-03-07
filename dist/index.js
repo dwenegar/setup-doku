@@ -5077,9 +5077,9 @@ exports.getInputs = void 0;
 const core = __importStar(__webpack_require__(470));
 const core_1 = __webpack_require__(470);
 const constants_1 = __webpack_require__(32);
-const VALID_DOKU_VERSIONS = ['0.3.1', '0.3.2', '0.3.3', '0.3.4', '0.3.5', '0.5.2'];
+const VALID_DOKU_VERSIONS = ['0.6.0'];
 const DOKU_VERSION_ALIASES = {
-    latest: '0.5.2'
+    latest: '0.6.0'
 };
 function getInputs() {
     const dokuVersion = core_1.getInput(constants_1.InputNames.DokuVersion, { required: true });
