@@ -54,7 +54,7 @@ export async function installDocFx(authToken: string, version: string, installPa
     const downloadPath: string = await tc.downloadTool(url, undefined, authToken);
     const docFxInstallPath = await extractArchive(downloadPath, 'zip', path.join(installPath, 'docfx'));
     if (sys.getPlatform() != 'win32') {
-      const docFxPath = path.join(docFxInstallPath, 'docfx.exe');
+      const docFxPath = path.join(docFxInstallPath, 'docfx');
       fs.chmodSync(docFxPath, 0o755);
     }
     return docFxInstallPath;
