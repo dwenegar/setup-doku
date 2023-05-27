@@ -20,8 +20,9 @@ export async function setupDoku() {
     const dokuPath = await installDoku(inputs.repoToken, dokuVersion, installPrefix);
     addPath(dokuPath);
 
-    core.info(`Setup DocFx`);
-    const docFxPath = await installDocFx(inputs.repoToken, installPrefix);
+    const docFxVersion = inputs.docFxVersion;
+    core.info(`Setup DocFx version ${docFxVersion}`);
+    const docFxPath = await installDocFx(inputs.repoToken, docFxVersion, installPrefix);
     addPath(docFxPath);
   } catch (e) {
     if (typeof e === 'string') {

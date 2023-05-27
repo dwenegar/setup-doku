@@ -38,10 +38,17 @@ export async function installDoku(authToken: string, version: string, installPat
   }
 }
 
-export async function installDocFx(authToken: string, installPath: string): Promise<string> {
+function getDocFxDownloadUrl(version: string): string {
+  const platform: string = sys.getPlatform();
+  const arch: string = sys.getArch();
+  const targetAssetName: string = `docfx-${platform}-${arch}-v${version}.zip`;
+  return `https://github.com/dotnet/docfx/releases/download/v${version}/${targetAssetName}`;
+}
+
+export async function installDocFx(authToken: string, version: string, installPath: string): Promise<string> {
   try {
     core.info('Attempting to install DocFx');
-    const url: string = `https://github.com/dotnet/docfx/releases/download/v2.59.0/docfx.zip`;
+    const url: string = getDocFxDownloadUrl(version);
 
     core.info(`Downloading DocFx from ${url}`);
     const downloadPath: string = await tc.downloadTool(url, undefined, authToken);

@@ -8,13 +8,13 @@ This action sets up Doku and DocFx.
 
 See [action.yml](action.yml)
 
-Install the default version of Doku (0.3.1) and DocFx (2.57.2).
+Install the default version of Doku (1.1.0) and DocFx (2.67.2).
 
 ```yaml
 - uses: dwenegar/setup-doku
 ```
 
-Install specific version of Lua and LuaRocks:
+Install specific version of Doku and DocFx:
 
 ```yaml
 - uses: dwenegar/setup-doku
