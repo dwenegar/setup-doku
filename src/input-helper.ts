@@ -18,8 +18,8 @@ export function getInputs(): Inputs {
   }
 
   return {
-    docFxVersion: dokuVersion,
-    dokuVersion: docFxVersion,
+    docFxVersion: docFxVersion,
+    dokuVersion: dokuVersion,
     repoToken: repoToken
   };
 }

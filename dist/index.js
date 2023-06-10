@@ -8946,8 +8946,8 @@ function getInputs() {
         core.setFailed(`Invalid DocFx version format: ${docFxVersion}`);
     }
     return {
-        docFxVersion: dokuVersion,
-        dokuVersion: docFxVersion,
+        docFxVersion: docFxVersion,
+        dokuVersion: dokuVersion,
         repoToken: repoToken
     };
 }
