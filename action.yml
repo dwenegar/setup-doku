@@ -12,11 +12,11 @@ inputs:
   doku-version:
     description: 'Doku version to use.'
     required: false
-    default: 'latest'
+    default: '1.1.1'
   docfx-version:
     description: 'DocFx version to use.'
     required: false
-    default: 'latest'
+    default: '2.67.3'
 
 runs:
   using: 'node12'
