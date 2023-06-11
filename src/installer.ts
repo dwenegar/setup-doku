@@ -5,6 +5,7 @@ import * as sys from './system';
 import * as fs from 'fs';
 
 async function extractArchive(archivePath: string, archiveSuffix: string, destPath: string): Promise<string> {
+  core.info(`Extracting ${archivePath} to ${destPath}`);
   if (archiveSuffix === 'zip') {
     return await tc.extractZip(archivePath, destPath);
   }
@@ -32,6 +33,7 @@ export async function installDoku(authToken: string, version: string, installPat
       const dokuPath = path.join(dokuInstallPath, 'doku');
       fs.chmodSync(dokuPath, 0o755);
     }
+    core.info(`Installed doku in ${dokuInstallPath}`);
     return dokuInstallPath;
   } catch (err) {
     throw new Error(`Failed to install Lua version ${version}: ${err}`);
@@ -57,6 +59,7 @@ export async function installDocFx(authToken: string, version: string, installPa
       const docFxPath = path.join(docFxInstallPath, 'docfx');
       fs.chmodSync(docFxPath, 0o755);
     }
+    core.info(`Installed DocFx in ${docFxInstallPath}`);
     return docFxInstallPath;
   } catch (err) {
     throw new Error(`Failed to install DocFX: ${err}`);

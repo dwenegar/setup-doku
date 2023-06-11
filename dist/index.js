@@ -8684,6 +8684,7 @@ const path = __importStar(__webpack_require__(622));
 const sys = __importStar(__webpack_require__(737));
 const fs = __importStar(__webpack_require__(747));
 async function extractArchive(archivePath, archiveSuffix, destPath) {
+    core.info(`Extracting ${archivePath} to ${destPath}`);
     if (archiveSuffix === 'zip') {
         return await tc.extractZip(archivePath, destPath);
     }
@@ -8708,6 +8709,7 @@ async function installDoku(authToken, version, installPath) {
             const dokuPath = path.join(dokuInstallPath, 'doku');
             fs.chmodSync(dokuPath, 0o755);
         }
+        core.info(`Installed doku in ${dokuInstallPath}`);
         return dokuInstallPath;
     }
     catch (err) {
@@ -8732,6 +8734,7 @@ async function installDocFx(authToken, version, installPath) {
             const docFxPath = path.join(docFxInstallPath, 'docfx');
             fs.chmodSync(docFxPath, 0o755);
         }
+        core.info(`Installed DocFx in ${docFxInstallPath}`);
         return docFxInstallPath;
     }
     catch (err) {
