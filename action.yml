@@ -12,7 +12,7 @@ inputs:
   doku-version:
     description: 'Doku version to use.'
     required: false
-    default: '1.1.1'
+    default: '1.1.2'
   docfx-version:
     description: 'DocFx version to use.'
     required: false
